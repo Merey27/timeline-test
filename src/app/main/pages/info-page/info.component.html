@@ -1,1 +1,23 @@
-<p>info works!</p>
+<ng-container *ngIf="(eventList | async) as list">
+  <div *ngIf="list.length > 0;
+        else loader"
+       class="timeline"
+       [style.width.px]="getWidthTimeline() + 50">
+    <div class="inner-timeline" [style.width.px]="getWidthTimeline()">
+      <div *ngFor="let item of list"
+           class="period"
+           [tooltip]="getTooltipText(item)"
+           [style.left.px]="getLeft(item)"
+           [style.width.px]="getWidth(item)"
+           [style.background-color]="getColor(item)"
+      ></div>
+
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #loader
+>
+  <div class="loader"></div>
+</ng-template>
+
